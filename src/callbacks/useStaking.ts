@@ -5,6 +5,7 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { useActiveWeb3React } from "hooks/web3"
 import { useToast } from "hooks/useToast";
 import { ContractTransaction } from "ethers";
+import { toBigNumber } from "utils/converters";
 
 
 export const useStaking = () => {
@@ -47,7 +48,7 @@ export const useStaking = () => {
         }, [stakingContract])
 
     useEffect(() => {
-        configLock()
+        configLock()    
         if (account) getStakes(account)
     }, [account, getStakes, configLock])
 
@@ -70,7 +71,7 @@ export const useStaking = () => {
         async (amount: BigNumber, stakeID: number) => {
             setLoading(true)
             try {
-                const tx: ContractTransaction = await withDrawStake(stakingContract, amount, stakeID, account)
+                const tx: ContractTransaction = await withDrawStake(stakingContract, amount, toBigNumber(stakeID), account)
                 toast(toastTypes.info, "Info", "Transaction is in proceess")
                 const success = await handleTransaction(tx)
                 if (success) getStakes(account); toast(toastTypes.success, "Success", "WithDrawn amount successfully")

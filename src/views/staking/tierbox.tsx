@@ -1,5 +1,5 @@
 import React from 'react'
-import svtlogo from '../../images/coinlogo.png'
+import svtlogo from 'images/coinlogo.png'
 import { Button } from 'reactstrap'
 import { formatBN, formatDateTime, formatDuration } from 'utils/formatters'
 import { BigNumber } from '@ethersproject/bignumber';
@@ -30,7 +30,7 @@ const Tierbox: React.FC<IStakeCard> = ({ stake, earn, withDraw, reward, index })
         <div className="border-box px-2 py-4 px-md-3 py-sm-4">
             <div className='d-flex justify-content-between align-items-center pb-2'>
                 <img className='mr-2' src={svtlogo} alt="..." />
-                <p className='mb-0 text-white h5'>Stake {index + 1 }</p>
+                <p className='mb-0 text-white h5'>Stake {index + 1}</p>
             </div>
             <div className='my-3'>
                 <div className='d-flex justify-content-between align-items-center'>

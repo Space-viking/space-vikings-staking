@@ -12,11 +12,14 @@ import { useTokenApproval } from 'hooks/useApproval';
 import { toBigNumber } from 'utils/converters';
 import Loader from 'components/Loader';
 
-const Stakebox: React.FC = () => {
+interface Props {
+    create: (amount: BigNumber, index: number) => void
+}
+const Stakebox: React.FC<Props> = ({ create }) => {
     const [dropdownopen, setdropdownopen] = useState<boolean>(false)
     const [dropdownvalue, setdropdownvalue] = useState<string>('Select Duration')
 
-    const { loading, locks, create } = useStaking()
+    const { loading, locks } = useStaking()
     const { token, isLoadingToken, approve, approving, approvedAmount } = useTokenApproval()
 
     const toggle = (): void => setdropdownopen(!dropdownopen)

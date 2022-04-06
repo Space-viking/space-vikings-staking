@@ -45,7 +45,6 @@ export const fetchTokens = async (
     })
 
     const tokensData = await nestedMulticall(IBEP20Abi, nestedCalls)
-    // const tokenData = await ethereummulticall(tokenAddresses, IBEP20Abi, call)
 
     return tokensData?.reduce((result: Token[], tokenData: any[], idx: number) => {
         const token: Token = {
@@ -79,7 +78,7 @@ export const addStake = async (contract: SpaceVikingsStacking, amount: BigNumber
 export const userStakes = (contract: SpaceVikingsStacking, account: string, addEarned: boolean) => {
     return contract.accountStakes(account, addEarned);
 }
-export const withDrawStake = async (contract: SpaceVikingsStacking, amount: BigNumber, stakeID: number, account: string) => {
+export const withDrawStake = async (contract: SpaceVikingsStacking, amount: BigNumber, stakeID: BigNumber, account: string) => {
     return contract.withdraw(amount, stakeID, { from: account })
 }
 export const getReward = async (contract: SpaceVikingsStacking, stakeID: number, account: string) => {
