@@ -20,9 +20,13 @@ const Staking: React.FC = () => {
       </div>
 
       <div className="row mx-0 mt-5">
-        <div className="col-lg-4 px-0 px-sm-2 col-sm-6 mb-3">
-          {stakes && stakes.map((stake, ind) => <Tierbox stake={stake} earn={earn} withDraw={withDraw} reward={reward} key={ind} index={ind} />)}
-        </div>
+          {stakes && stakes.map((stake, ind) =>
+              <div className="col-lg-4 px-0 px-sm-2 col-sm-6 mb-3">
+
+              <Tierbox stake={stake} earn={earn} withDraw={withDraw} reward={reward} key={ind} index={ind} />
+              </div>
+
+          )}
       </div>
     </div>
   );
