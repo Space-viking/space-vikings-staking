@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
-import {  getTokenAddress } from "utils/addressHelper"
+import { getStakingAdress, getTokenAddress } from "utils/addressHelper"
 import { fetchToken, Token } from "utils/callHelper"
-import { useBEP20 } from "./useContract"
 import { useActiveWeb3React } from "./web3"
 
 
@@ -14,19 +13,19 @@ export const useToken = () => {
     const getToken = useCallback(async () => {
         setLoading(true)
         try {
-            // const receipt = await fetchToken(getTokenAddress(), account,getstakeAddress())
-            // setToken(receipt)
+            const receipt = await fetchToken(getTokenAddress(),account,getStakingAdress())
+            setToken(receipt)
         } catch (error) {
             console.log('err', error)
         } finally {
             setLoading(false)
         }
-    }, [account, getTokenAddress])
+    }, [account])
 
     useEffect(() => {
         if (account) getToken()
     }, [account])
 
 
-    return { token, isLoadingToken ,getToken}
+    return { token, isLoadingToken, getToken }
 }

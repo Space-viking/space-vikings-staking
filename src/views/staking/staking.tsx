@@ -1,11 +1,14 @@
 import React from "react";
 import Stakebox from "./stakebox";
 import Tierbox from "./tierbox";
-import vikinglogo from "../../images/viking-logo.png";
+import vikinglogo from "images/viking-logo.png";
+import { useStaking } from "callbacks/useStaking";
 
-const items = [1, 2, 3, 4, 5];
 
 const Staking: React.FC = () => {
+
+  const { stakes, earn, withDraw, reward } = useStaking()
+
   return (
     <div className="container-fluid pt-5 pb-3 px-3 px-xl-5 relative-position">
       <img src={vikinglogo} className="bg-coin-img" />
@@ -17,13 +20,9 @@ const Staking: React.FC = () => {
       </div>
 
       <div className="row mx-0 mt-5">
-        {items.map(() => {
-          return (
-            <div className="col-lg-4 px-0 px-sm-2 col-sm-6 mb-3">
-              <Tierbox />
-            </div>
-          );
-        })}
+        <div className="col-lg-4 px-0 px-sm-2 col-sm-6 mb-3">
+          {stakes && stakes.map((stake, ind) => <Tierbox stake={stake} earn={earn} withDraw={withDraw} reward={reward} key={ind} index={ind} />)}
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 
 export interface Address {
-  1337?: string |null
+  97?: string
   // 56: string
 }

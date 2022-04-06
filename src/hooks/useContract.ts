@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 import {
-    getBep20Contract, getGreetingContract, getTestContract
+    geStakingContract,
+    getBep20Contract
 } from 'utils/contractHelper'
-import useWeb3 from './useWeb3'
 import { useActiveWeb3React } from './web3'
 
 export const useSigner = () => {
@@ -13,16 +13,9 @@ export const useSigner = () => {
 
 export const useBEP20 = (address: string) => {
     const signer = useSigner()
-    const web3 = useWeb3()
-    return useMemo(() => address ? getBep20Contract(address, web3 ) : null, [address, web3 ])
+    return useMemo(() => address ? getBep20Contract(address, signer) : null, [address, signer])
 }
-export const useTestContract =()=>{
+export const useStakingContract = () => {
     const signer = useSigner()
-    const web3 = useWeb3()
-    return useMemo(()=>getTestContract(web3),[web3 ])
-}
-
-export const useGreeting =()=>{
-    const web3 = useWeb3()
-    return useMemo(()=>getGreetingContract(web3),[web3])
+    return useMemo(() => geStakingContract(signer), [signer])
 }

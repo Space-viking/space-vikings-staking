@@ -1,13 +1,12 @@
-// import BigNumber from 'bignumber.js'
-import { IBEP20 } from '../config/types/IBEP20';
+import { FakeToken, SpaceVikingsStacking } from 'config/types';
 import { Contract, ContractTransaction, ContractReceipt } from '@ethersproject/contracts'
 import { BigNumber } from '@ethersproject/bignumber';
 
-import IBEP20Abi from '../config/abi/IBEP20.json'
+import IBEP20Abi from 'config/abi/IBEP20.json'
 import { first, toFinite } from 'lodash'
-import { toBigNumber } from '../utils/converters'
 import { Call, nestedMulticall } from 'utils/multicall'
-import { Test } from 'config/types/test';
+import { CallContext } from 'ethereum-multicall/dist/esm/models';
+import { toBigNumber } from './converters';
 
 
 export interface Token {
@@ -31,7 +30,6 @@ export const fetchTokens = async (
     account?: string,
     spender?: string,
 ): Promise<Token[]> => {
-    if (!tokenAddresses) return []
 
     const nestedCalls: Call[][] = tokenAddresses.map((tokenAddress) => {
         const calls: Call[] = []
@@ -39,14 +37,16 @@ export const fetchTokens = async (
         calls.push({ address: tokenAddress, name: 'symbol' })
         calls.push({ address: tokenAddress, name: 'decimals' })
         calls.push({ address: tokenAddress, name: 'totalSupply' })
-
         if (account) {
             calls.push({ address: tokenAddress, name: 'balanceOf', params: [account] })
             if (spender) calls.push({ address: tokenAddress, name: 'allowance', params: [account, spender] })
         }
         return calls
     })
+
     const tokensData = await nestedMulticall(IBEP20Abi, nestedCalls)
+    // const tokenData = await ethereummulticall(tokenAddresses, IBEP20Abi, call)
+
     return tokensData?.reduce((result: Token[], tokenData: any[], idx: number) => {
         const token: Token = {
             address: tokenAddresses[idx].toLowerCase(),
@@ -61,17 +61,30 @@ export const fetchTokens = async (
         return [...result, token]
     }, [])
 }
-export const fetchToken = async (tokenAddress: string, account?: string, spender?: string): Promise<Token> => {
+export const fetchToken = async (tokenAddress?: string, account?: string, spender?: string): Promise<Token> => {
     const tokens = await fetchTokens([tokenAddress], account, spender)
     return first(tokens)
 }
-export const approve = (contract: IBEP20, amount: BigNumber, spender: string, account: string) => {
+export const approve = (contract: FakeToken, amount: BigNumber, spender: string, account: string) => {
     return contract.approve(spender, amount, { from: account })
 }
-export const postData = (contract: any, input: BigNumber) => {
-    return contract.methods.setNumber(input).encodeABI()
-}
 
-export const fetchNumber = (contract: any) => {
-    return contract.methods.getNumber().encodeABI()
+// stake calls
+export const configureLocks = async (contract: SpaceVikingsStacking) => {
+    return contract.allConfiguredLocks()
+}
+export const addStake = async (contract: SpaceVikingsStacking, amount: BigNumber, configId: number, account: string) => {
+    return contract.stake(amount, configId, { from: account })
+}
+export const userStakes = (contract: SpaceVikingsStacking, account: string, addEarned: boolean) => {
+    return contract.accountStakes(account, addEarned);
+}
+export const withDrawStake = async (contract: SpaceVikingsStacking, amount: BigNumber, stakeID: number, account: string) => {
+    return contract.withdraw(amount, stakeID, { from: account })
+}
+export const getReward = async (contract: SpaceVikingsStacking, stakeID: number, account: string) => {
+    return contract.getReward(stakeID, { from: account })
+}
+export const earnAmount = async (contract: SpaceVikingsStacking, acount: string, index: number) => {
+    return contract.earned(acount, index);
 }

@@ -2,34 +2,24 @@ import { Web3Provider } from '@ethersproject/providers'
 import { Signer } from '@ethersproject/abstract-signer'
 import { Contract, ContractInterface } from '@ethersproject/contracts'
 
-//addresses
-import { getGreetingAddres, getTestAdress } from './addressHelper'
 
+//addresses
+import {  getStakingAdress } from './addressHelper'
 // ABI
 import bep20Abi from 'config/abi/IBEP20.json'
-import testAbi from 'config/abi/Test.json'
-import greetingAbi from 'config/abi/greeting.json'
-
+import stakingABI from 'config/abi/Spacevikingabi.json'
 //types
-import { IBEP20 } from 'config/types/IBEP20'
-import { Test } from 'config/types/test'
-import web3NoAccount from './web3'
-import Web3 from 'web3'
+import { FakeToken } from 'config/types/FakeToken'
+import { SpaceVikingsStacking } from 'config/types/SpaceVikingsStacking'
 
 
-const getContract = (address: string, abi: any, signerOrProvider?: Web3) => {
-    // return new Contract(address, abi, signerOrProvider)
-    const _web3 = signerOrProvider ?? web3NoAccount
-    return new _web3.eth.Contract(abi, address)
+const getContract = (address: string, abi: any, signerOrProvider?: Web3Provider | Signer) => {
+    return new Contract(address, abi, signerOrProvider)
 }
 
-export const getBep20Contract = (address: string, signerOrProvider?: Web3 ) => {
-    return getContract(address, bep20Abi, signerOrProvider) as unknown as IBEP20
+export const getBep20Contract = (address: string, signerOrProvider?: Web3Provider | Signer) => {
+    return getContract(address, bep20Abi, signerOrProvider) as unknown as FakeToken
 }
-export const getTestContract = (signerOrProvider?: Web3) => {
-    return getContract(getTestAdress(), testAbi, signerOrProvider) as unknown as Test
-}
-
-export const getGreetingContract=(signerOrProvider?: Web3)=>{
-    return getContract(getGreetingAddres(),greetingAbi,signerOrProvider)  as any
+export const geStakingContract = (signerOrProvider?: Web3Provider | Signer) => {
+    return getContract(getStakingAdress(), stakingABI, signerOrProvider) as unknown as SpaceVikingsStacking
 }

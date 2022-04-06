@@ -65,7 +65,7 @@ const Walletmodal: React.FC<IProps> = ({ onclose }) => {
                 </div>
               );
             })}
-            <p
+            <a
               className="text-white"
               id="learn_to_connect"
               onClick={() =>
@@ -81,7 +81,7 @@ const Walletmodal: React.FC<IProps> = ({ onclose }) => {
                 </span>{" "}
                 Learn how to connect
               </p>
-            </p>
+            </a>
           </div>
         </div>
       </div>

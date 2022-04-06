@@ -1,18 +1,19 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { ContractTransaction } from 'ethers'
 import { useCallback, useMemo, useState } from 'react'
-import { getTokenAddress } from 'utils/addressHelper'
+import { getStakingAdress, getTokenAddress } from 'utils/addressHelper'
 import { approve, handleTransaction } from 'utils/callHelper'
+import { formatBN } from 'utils/formatters'
 import { useBEP20 } from './useContract'
 import { useToast } from './useToast'
 import { useToken } from './useToken'
 import { useActiveWeb3React } from './web3'
 
 export const useTokenApproval = () => {
-    return useApproval(getTokenAddress())
+    return useApproval(getTokenAddress(), getStakingAdress())
 }
 
-export const useApproval = (tokenAddress: string, spender?: string) => {
+export const useApproval = (tokenAddress?: string, spender?: string) => {
 
     const { account, chainId } = useActiveWeb3React()
     const tokenContract = useBEP20(tokenAddress)
