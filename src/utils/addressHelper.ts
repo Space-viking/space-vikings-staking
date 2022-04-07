@@ -12,7 +12,7 @@ export const getStakingAdress = () => {
     return getAddress(addresses.spaceviking)
 }
 export const getTokenAddress =()=>{
-    return getAddress(addresses.ORTtoken)
+    return getAddress(addresses.token)
 }
 export const getMulticallAddress = () => {
     return getAddress(addresses.multiCall)

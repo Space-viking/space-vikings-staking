@@ -4,7 +4,7 @@ import { Modal } from 'reactstrap'
 
 const Disclaimer: React.FC = () => {
     const [opendisclaimer, setopendisclaimer] = useState<boolean>(false)
-    const disclaimerclose = (): void => setopendisclaimer(!opendisclaimer)
+    const disclaimerclose = () => setopendisclaimer(!opendisclaimer)
     return (
         <>
             <p className='mb-0 px-2 text-color text-center'><i className="far fa-question-circle mr-2" />Read our <span onClick={disclaimerclose} className='pointer terms-condition'>terms & conditions</span> before proceeding</p>

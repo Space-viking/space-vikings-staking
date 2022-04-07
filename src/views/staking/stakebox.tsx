@@ -10,7 +10,7 @@ import { BigNumber } from 'ethers';
 import { formatBN, formatDuration } from 'utils/formatters';
 import { useTokenApproval } from 'hooks/useApproval';
 import { toBigNumber } from 'utils/converters';
-import Loader from 'components/Loader';
+// import Loader from 'components/Loader';
 
 interface Props {
     create: (amount: BigNumber, index: number) => void
@@ -33,7 +33,7 @@ const Stakebox: React.FC<Props> = ({ create }) => {
         if (value && toFinite(value) < 0) {
             setAmountError("amount should be greater than 0")
         } else {
-            const { value: amount, error } = validateSingle(value, 'BigNumber');
+            const { value: amount, error } = validateSingle(value, 'BigNumber', 9);
             if (error) {
                 setAmountError(error)
             } else {

@@ -7,8 +7,8 @@ import { toBool } from './converters'
 export const validateSingle = <T>(
   value: any,
   type: string,
-  mandatory = true,
   extra?: any,
+  mandatory = true
 ) => {
   const { newValue, newErrors } = validate<{ value?: T }>({}, {}, value, "value", type, mandatory, extra)
   return { value: newValue?.value, error: newErrors?.value }
