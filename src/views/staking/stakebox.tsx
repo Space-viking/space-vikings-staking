@@ -60,7 +60,7 @@ const Stakebox: React.FC<Props> = ({ create }) => {
     const isloading = loading || isLoadingToken || approving
     return (
         <div className='border-box py-3'>
-            <Loader loading={isloading} />
+            {/* <Loader loading={isloading} /> */}
             <p className='text-white p-2 h3 text-center'>Stake</p>
             <div className="border-box p-3 mx-3 my-4 text-white">
                 <div className="form-group d-flex justify-content-between align-items-start">

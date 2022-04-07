@@ -28,7 +28,7 @@ export const useStaking = () => {
                 setStakes(temp.stakes)
                 setEarn(temp.stakesEarned)
             } catch (error) {
-                // alert((error as any).message)
+                toast(toastTypes.error, "transaction Failed", (error as any).message)
             } finally {
                 setLoading(false)
             }
@@ -41,14 +41,14 @@ export const useStaking = () => {
                 const configLog = await configureLocks(stakingContract)
                 setLocks(configLog)
             } catch (error) {
-                // console.log('sasd', error)
+                toast(toastTypes.error, "transaction Failed", (error as any).message)
             } finally {
                 setLoading(false)
             }
         }, [stakingContract])
 
     useEffect(() => {
-        configLock()    
+        configLock()
         if (account) getStakes(account)
     }, [account, getStakes, configLock])
 
@@ -84,14 +84,17 @@ export const useStaking = () => {
 
     const reward = useCallback(
         async (stakeID: number) => {
-            setLoading(true)
-            const tx: ContractTransaction = await getReward(stakingContract, stakeID, account)
-            toast(toastTypes.info, "Info", "Transaction is in proceess")
-            const success = await handleTransaction(tx)
-            if (success) getStakes(account); toast(toastTypes.success, "Success", "Rewards sent successfully")
-            setLoading(false)
+            try {
+                setLoading(true)
+                const tx: ContractTransaction = await getReward(stakingContract, stakeID, account)
+                toast(toastTypes.info, "Info", "Transaction is in proceess")
+                const success = await handleTransaction(tx)
+                if (success) getStakes(account); toast(toastTypes.success, "Success", "Rewards sent successfully")
+            } catch (error) {
+                toast(toastTypes.error, "Error", (error as any).message)
+            } finally {
+                setLoading(false)
+            }
         }, [stakingContract])
-
-
     return { loading, locks, create, stakes, earn, withDraw, reward }
 }

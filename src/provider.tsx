@@ -18,7 +18,6 @@ const Providers: React.FC = ({ children }) => {
                 {children}
             </Web3ProviderNetwork>
         </Web3ReactProvider>
-
     )
 }
 
