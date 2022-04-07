@@ -26,7 +26,7 @@ const Loader: React.FC<Props> = ({ loading }) => {
             height={100} width={50} />
           <ReactLoading type="spin" color="#0000FF"
             height={100} width={50} /> */}
-          <ReactLoading type="spokes" color="#0000FF"
+          <ReactLoading type="spokes" color="#a2b4d2"
             height={200} width={200} />
           {/* <ReactLoading
             type="spinningBubbles"

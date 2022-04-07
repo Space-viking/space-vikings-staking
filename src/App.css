@@ -175,10 +175,10 @@ body {
 }
 .bg-coin-img {
   position: absolute;
-  top: 30%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  width: 40%;
   opacity: 0.12;
 }
 
@@ -217,13 +217,13 @@ body {
     font-size: 14px;
   }
   .bg-coin-img {
-    top: 20%;
-    width: 70%;
+    top: 55%;
+    width: 60%;
   }
 }
 @media (min-width:1500px){
   .bg-coin-img {
-    top: 40%;
+    top: 60%;
   }
 }
 @media (max-width: 578px) {
@@ -235,7 +235,7 @@ body {
     font-size: 13px;
   }
   .bg-coin-img {
-    top: 12%;
+    top: 50%;
     width: 80%;
   }
 }

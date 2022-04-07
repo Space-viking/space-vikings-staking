@@ -39,7 +39,7 @@ const Tierbox: React.FC<IStakeCard> = ({ stake, earn, withDraw, reward, index })
                 </div>
                 <div className='d-flex justify-content-between align-items-center'>
                     <p className='mb-2 tier-font text-color'>Staked Duration</p>
-                    <p className='mb-2 tier-font text-white'>{formatDuration((stake.unlock.toNumber() - stake.started.toNumber()))} min</p>
+                    <p className='mb-2 tier-font text-white'>{formatDuration((stake.unlock.toNumber() - stake.started.toNumber()))}</p>
                 </div>
                 <div className='d-flex justify-content-between align-items-center'>
                     <p className='mb-2 tier-font text-color'>Withdraw TimeFrame</p>

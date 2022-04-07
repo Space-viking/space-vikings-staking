@@ -86,9 +86,9 @@ const Stakebox: React.FC<Props> = ({ create }) => {
                                     key={ind}
                                     onClick={() => {
                                         setIndex(ind)
-                                        setdropdownvalue(`${option.apy / 100}% apy ${formatDuration(option.time.toNumber())} minutes`)
+                                        setdropdownvalue(`${option.apy / 100}% apy ${formatDuration(option.time.toNumber())}`)
                                     }}
-                                >{option.apy / 100}% apy - {formatDuration(option.time.toNumber())} minutes
+                                >{option.apy / 100}% apy - {formatDuration(option.time.toNumber())}
                                 </DropdownItem>
                             ))}
                         </DropdownMenu>
