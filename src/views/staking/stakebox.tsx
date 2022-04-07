@@ -30,8 +30,8 @@ const Stakebox: React.FC<Props> = ({ create }) => {
     const [amountError, setAmountError] = useState<string>('')
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target
-        if (value && toFinite(value) < 50000) {
-            setAmountError("amount should be greater than 500")
+        if (value && toFinite(value) < 0) {
+            setAmountError("amount should be greater than 0")
         } else {
             const { value: amount, error } = validateSingle(value, 'BigNumber');
             if (error) {
@@ -57,10 +57,8 @@ const Stakebox: React.FC<Props> = ({ create }) => {
         create(amount, index)
     }
 
-    const isloading = loading || isLoadingToken || approving
     return (
         <div className='border-box py-3'>
-            {/* <Loader loading={isloading} /> */}
             <p className='text-white p-2 h3 text-center'>Stake</p>
             <div className="border-box p-3 mx-3 my-4 text-white">
                 <div className="form-group d-flex justify-content-between align-items-start">
