@@ -19,7 +19,7 @@ const Stakebox: React.FC<Props> = ({ create }) => {
     const [dropdownopen, setdropdownopen] = useState<boolean>(false)
     const [dropdownvalue, setdropdownvalue] = useState<string>('Select Duration')
 
-    const { loading, locks } = useStaking()
+    const { locks } = useStaking()
     const { token, isLoadingToken, approve, approving, approvedAmount } = useTokenApproval()
 
     const toggle = (): void => setdropdownopen(!dropdownopen)

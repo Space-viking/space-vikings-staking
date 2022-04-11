@@ -7,7 +7,6 @@ import binancewallet from "images/Binancewallet.png";
 import walletconnect from "images/walletconnect.png";
 import safepalwallet from "images/Logo_Icon_black.png";
 import { connectorLocalStorageKey, ConnectorNames } from "config/constants/wallets";
-import useAuth from "hooks/useAuth";
 
 let walletNames = [
   { name: "Metamask", img: metamask, connectorId: ConnectorNames.Injected },
@@ -20,11 +19,12 @@ let walletNames = [
 ];
 
 interface IProps {
-  onclose: () => void;
+  onclose: () => void,
+  login: (connectorId: ConnectorNames) => void
 }
 
-const Walletmodal: React.FC<IProps> = ({ onclose }) => {
-  const { login } = useAuth()
+const Walletmodal: React.FC<IProps> = ({ onclose, login }) => {
+  // const { login } = useAuth()
   return (
     <div>
       <div id="modal_box">
