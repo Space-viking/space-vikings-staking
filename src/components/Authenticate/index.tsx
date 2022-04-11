@@ -21,9 +21,18 @@ function Authenticate() {
             {!account ? <>
                 <Button outline className="text-color font-weight-600 px-4 connect-btn" onClick={openModal}>Connect Wallet</Button>
                 <Modal open={modal} center onClose={openModal}>
-                    <Walletmodal onclose={openModal} login={login}/>
+                    <Walletmodal onclose={openModal} login={login} />
                 </Modal>
-            </> : <div className="text-color font-weight-600 px-4 connect-btn" onClick={() => logout()}>{nameSpace}</div>}
+            </> :
+                <div className="dropdown">
+                    <div className="text-color font-weight-600 connect-btn px-4 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {nameSpace} <i className="fas fa-chevron-down" />
+                    </div>
+                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button className="dropdown-item" onClick={() => logout()}>LogOut</button>
+                    </div>
+                </div>
+            }
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import coinlogo from 'images/coinlogo40by40.png'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { Button, Modal } from 'reactstrap'
+import { Button } from 'reactstrap'
 import Disclaimer from './disclaimer';
 import { useStaking } from 'callbacks/useStaking';
 import { isEmpty, isNil, toFinite } from 'lodash';
@@ -20,7 +20,7 @@ const Stakebox: React.FC<Props> = ({ create }) => {
     const [dropdownvalue, setdropdownvalue] = useState<string>('Select Duration')
 
     const { locks } = useStaking()
-    const { token, isLoadingToken, approve, approving, approvedAmount } = useTokenApproval()
+    const { token, approve, approving, approvedAmount } = useTokenApproval()
 
     const toggle = (): void => setdropdownopen(!dropdownopen)
 

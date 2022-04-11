@@ -24,7 +24,7 @@ export const useToken = () => {
 
     useEffect(() => {
         if (account) getToken()
-    }, [account])
+    }, [account,getToken])
 
 
     return { token, isLoadingToken, getToken }

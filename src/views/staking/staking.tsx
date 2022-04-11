@@ -10,7 +10,7 @@ const Staking: React.FC = () => {
   return (
     <div className="container-fluid pt-5 pb-3 px-3 px-xl-5 relative-position">
       <Loader loading={loading} />
-      <img src={vikinglogo} className="bg-coin-img" />
+      <img src={vikinglogo} className="bg-coin-img" alt=""/>
       <div className="row mx-0">
         <div className="col-sm-8 offset-sm-2 px-0 px-sm-3 col-lg-6 offset-lg-3">
           <Stakebox create={create} />

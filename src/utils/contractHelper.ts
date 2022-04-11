@@ -1,10 +1,10 @@
 import { Web3Provider } from '@ethersproject/providers'
 import { Signer } from '@ethersproject/abstract-signer'
-import { Contract, ContractInterface } from '@ethersproject/contracts'
+import { Contract } from '@ethersproject/contracts'
 
 
 //addresses
-import {  getStakingAdress } from './addressHelper'
+import { getStakingAdress } from './addressHelper'
 // ABI
 import bep20Abi from 'config/abi/IBEP20.json'
 import stakingABI from 'config/abi/Spacevikingabi.json'

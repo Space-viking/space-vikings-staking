@@ -1,11 +1,10 @@
 import { FakeToken, SpaceVikingsStacking } from 'config/types';
-import { Contract, ContractTransaction, ContractReceipt } from '@ethersproject/contracts'
+import { ContractTransaction } from '@ethersproject/contracts'
 import { BigNumber } from '@ethersproject/bignumber';
 
 import IBEP20Abi from 'config/abi/IBEP20.json'
 import { first, toFinite } from 'lodash'
 import { Call, nestedMulticall } from 'utils/multicall'
-import { CallContext } from 'ethereum-multicall/dist/esm/models';
 import { toBigNumber } from './converters';
 
 
