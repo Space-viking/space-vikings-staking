@@ -53,15 +53,8 @@ const Walletmodal: React.FC<IProps> = ({ onclose }) => {
                     onclose()
                   }}
                 >
-                  <p className="d-inline" id="wallet_names">
-                    {item.name}
-                  </p>
-                  <img
-                    src={item.img}
-                    alt="..."
-                    height="50"
-                    className="py-2"
-                  ></img>
+                  <p className="d-inline" id="wallet_names">{item.name}</p>
+                  <img src={item.img} alt="..." height="50" className="py-2" />
                 </div>
               );
             })}

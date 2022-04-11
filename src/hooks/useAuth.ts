@@ -25,12 +25,9 @@ const useAuth = () => {
     if (connector) {
       activate(connector, async (error: Error) => {
         if (error instanceof UnsupportedChainIdError) {
-          const hasSetup = await setupNetwork()
-          if (hasSetup) {
-            activate(connector)
-          }
-        } else {
           window.localStorage.removeItem(connectorLocalStorageKey)
+          toast(toastTypes.error, error.name, error.message)
+        } else {
           if (error instanceof NoEthereumProviderError) {
             toast(toastTypes.error, 'Provider Error', 'No provider was found')
           } else if (
@@ -41,7 +38,7 @@ const useAuth = () => {
               const walletConnector = connector as WalletConnectConnector
               walletConnector.walletConnectProvider = null
             }
-            toast(toastTypes.error, "Authorization error", 'Please authorize to access your account')
+            toast(toastTypes.error, "Authorization error", error.message)
           } else {
             toast(toastTypes.error, error.name, error.message)
           }

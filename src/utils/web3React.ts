@@ -12,7 +12,7 @@ let rpcUrl = getNodeUrl()
 const chainId = parseInt(process.env.REACT_APP_CHAIN_ID, 10)
 // const chainId =parseInt(process.env.REACT_APP_CHAIN_ID_LOCALHOST,10)
 
-export const injected = new InjectedConnector({})
+export const injected = new InjectedConnector({ supportedChainIds: [chainId] })
 // export const injected = new InjectedConnector({ supportedChainIds: [chainId] })
 
 const walletConnectorSetting: IWalletConnectProviderOptions = {
