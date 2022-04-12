@@ -8,19 +8,21 @@ import { isEmpty, isNil, toFinite } from 'lodash';
 import { validateSingle } from 'utils/validate';
 import { BigNumber } from 'ethers';
 import { formatBN, formatDuration } from 'utils/formatters';
-import { useTokenApproval } from 'hooks/useApproval';
 import { toBigNumber } from 'utils/converters';
-// import Loader from 'components/Loader';
 
 interface Props {
     create: (amount: BigNumber, index: number) => void
+    token: any
+    approve: (amount: BigNumber) => void
+    approvedAmount: BigNumber
+    approving: boolean
 }
-const Stakebox: React.FC<Props> = ({ create }) => {
+
+const Stakebox: React.FC<Props> = ({ create, token, approve, approvedAmount, approving }) => {
     const [dropdownopen, setdropdownopen] = useState<boolean>(false)
     const [dropdownvalue, setdropdownvalue] = useState<string>('Select Duration')
 
     const { locks } = useStaking()
-    const { token, approve, approving, approvedAmount } = useTokenApproval()
 
     const toggle = (): void => setdropdownopen(!dropdownopen)
 
@@ -46,13 +48,13 @@ const Stakebox: React.FC<Props> = ({ create }) => {
         () => approvedAmount && approvedAmount.gt(BigNumber.from(0)) && approvedAmount.gte(toBigNumber(amount)),
         [amount, approvedAmount]
     )
-    const onAprrove = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const onAprrove = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         if (amount > 0 && !approving) approve(toBigNumber(amount))
     }
     const valid = useMemo(() => isEmpty(amountError) && approvedAmount.gte(toBigNumber(amount)) && !isNil(index), [index, amountError, approvedAmount, amount])
     const approveValid = useMemo(() => isEmpty(amountError) && amount && !isNil(index), [index, amountError, amount])
-    const onSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         create(amount, index)
     }
@@ -107,8 +109,7 @@ const Stakebox: React.FC<Props> = ({ create }) => {
                     block
                     onClick={onAprrove}
                     disabled={!approveValid}
-                >Approve</Button>
-                }
+                >Approve</Button>}
             </div>
         </div>
     )

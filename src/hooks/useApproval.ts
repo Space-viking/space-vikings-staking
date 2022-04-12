@@ -3,7 +3,6 @@ import { ContractTransaction } from 'ethers'
 import { useCallback, useMemo, useState } from 'react'
 import { getStakingAdress, getTokenAddress } from 'utils/addressHelper'
 import { approve, handleTransaction } from 'utils/callHelper'
-import { formatBN } from 'utils/formatters'
 import { useBEP20 } from './useContract'
 import { useToast } from './useToast'
 import { useToken } from './useToken'
@@ -27,9 +26,9 @@ export const useApproval = (tokenAddress?: string, spender?: string) => {
                 setApproving(true)
                 let transaction: ContractTransaction
                 transaction = await approve(tokenContract, amount, spender, account)
-                toast(toastTypes.info, "Info", "Approve is in proceess")
+                toast(toastTypes.info, "Info", "Approve is in process")
                 const success = await handleTransaction(transaction)
-                if (success) getToken(); toast(toastTypes.success, "Success", "Approve succeed")
+                if (success) getToken(); toast(toastTypes.success, "Success", "Successfully approved")
                 return success
             } catch (error: any) {
                 toast(toastTypes.error, "transaction Failed", error.message)

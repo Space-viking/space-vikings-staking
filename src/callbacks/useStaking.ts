@@ -22,7 +22,7 @@ export const useStaking = () => {
 
     const getStakes = useCallback(
         async (_account: string) => {
-            setLoading(true)
+            // setLoading(true)
             try {
                 let temp = await userStakes(stakingContract, _account, true)
                 setStakes(temp.stakes)
@@ -30,20 +30,20 @@ export const useStaking = () => {
             } catch (error) {
                 toast(toastTypes.error, "transaction Failed", (error as any).message)
             } finally {
-                setLoading(false)
+                // setLoading(false)
             }
         }, [stakingContract])
 
     const configLock = useCallback(
         async () => {
             try {
-                setLoading(true)
+                // setLoading(true)
                 const configLog = await configureLocks(stakingContract)
                 setLocks(configLog)
             } catch (error) {
                 toast(toastTypes.error, "transaction Failed", (error as any).message)
             } finally {
-                setLoading(false)
+                // setLoading(false)
             }
         }, [stakingContract])
 
@@ -57,7 +57,7 @@ export const useStaking = () => {
             try {
                 setLoading(true)
                 const tx: ContractTransaction = await addStake(stakingContract, amount, lockIndex, account)
-                toast(toastTypes.info, "transaction Info", "Creating Stake is in proceess")
+                toast(toastTypes.info, "transaction Info", "Creating Stake is in process")
                 const success = await handleTransaction(tx)
                 if (success) getStakes(account); toast(toastTypes.success, "Success", "Stake created")
             } catch (err) {
@@ -72,7 +72,7 @@ export const useStaking = () => {
             setLoading(true)
             try {
                 const tx: ContractTransaction = await withDrawStake(stakingContract, amount, toBigNumber(stakeID), account)
-                toast(toastTypes.info, "Info", "Transaction is in proceess")
+                toast(toastTypes.info, "Info", "Transaction is in process")
                 const success = await handleTransaction(tx)
                 if (success) getStakes(account); toast(toastTypes.success, "Success", "WithDrawn amount successfully")
             } catch (error) {
@@ -87,7 +87,7 @@ export const useStaking = () => {
             try {
                 setLoading(true)
                 const tx: ContractTransaction = await getReward(stakingContract, stakeID, account)
-                toast(toastTypes.info, "Info", "Transaction is in proceess")
+                toast(toastTypes.info, "Info", "Transaction is in process")
                 const success = await handleTransaction(tx)
                 if (success) getStakes(account); toast(toastTypes.success, "Success", "Rewards sent successfully")
             } catch (error) {
