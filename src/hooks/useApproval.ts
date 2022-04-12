@@ -28,7 +28,7 @@ export const useApproval = (tokenAddress?: string, spender?: string) => {
                 transaction = await approve(tokenContract, amount, spender, account)
                 toast(toastTypes.info, "Info", "Approve is in process")
                 const success = await handleTransaction(transaction)
-                if (success) getToken(); toast(toastTypes.success, "Success", "Approve succeed")
+                if (success) getToken(); toast(toastTypes.success, "Success", "Successfully approved")
                 return success
             } catch (error: any) {
                 toast(toastTypes.error, "transaction Failed", error.message)
