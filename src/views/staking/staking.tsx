@@ -4,16 +4,27 @@ import Tierbox from "./tierbox";
 import vikinglogo from "images/viking-logo.png";
 import { useStaking } from "callbacks/useStaking";
 import Loader from "components/Loader";
+import { useTokenApproval } from "hooks/useApproval";
 
 const Staking: React.FC = () => {
   const { stakes, loading, earn, withDraw, reward, create } = useStaking()
+  const { token, approve, approving, approvedAmount } = useTokenApproval()
+
+  const isLoading = approving || loading
+  
   return (
     <div className="container-fluid pt-5 pb-3 px-3 px-xl-5 relative-position">
-      <Loader loading={loading} />
-      <img src={vikinglogo} className="bg-coin-img" alt=""/>
+      <Loader loading={isLoading} />
+      <img src={vikinglogo} className="bg-coin-img" alt="" />
       <div className="row mx-0">
         <div className="col-sm-8 offset-sm-2 px-0 px-sm-3 col-lg-6 offset-lg-3">
-          <Stakebox create={create} />
+          <Stakebox
+            create={create}
+            token={token}
+            approve={approve}
+            approvedAmount={approvedAmount}
+            approving={approving}
+          />
         </div>
         {/* <div className='col-lg-6'></div> */}
       </div>
